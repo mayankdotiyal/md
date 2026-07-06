@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mayank Dotiyal, Ph.D. — Materials Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c1b19;
+    --paper:#f7f5f0;
+    --paper-dim:#efece4;
+    --oxide:#8b4226;
+    --oxide-dim:#a85a3a;
+    --slate:#3d4f5c;
+    --slate-dim:#5a6e7c;
+    --gold:#b08d57;
+    --line:#d8d3c8;
+    --serif:'Source Serif 4', Georgia, serif;
+    --sans:'IBM Plex Sans', -apple-system, sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    transition:background 0.8s ease;
+  }
+  body.metallic{ background:#eef1f2; }
+
+  ::selection{ background:var(--gold); color:var(--paper); }
+
+  a{ color:inherit; }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 32px; }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,245,240,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  body.metallic nav{ background:rgba(238,241,242,0.92); }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:18px; padding-bottom:18px;
+  }
+  .brand{ font-family:var(--mono); font-size:14px; letter-spacing:0.5px; color:var(--oxide); }
+  .navlinks{ display:flex; gap:28px; list-style:none; }
+  .navlinks a{
+    font-size:14px; text-decoration:none; color:var(--ink);
+    border-bottom:1px solid transparent; padding-bottom:2px;
+    transition:border-color 0.2s;
+  }
+  .navlinks a:hover{ border-color:var(--oxide); }
+  .navlinks a:focus-visible, .brand:focus-visible{ outline:2px solid var(--oxide); outline-offset:3px; }
+
+  /* HERO */
+  header.hero{ padding:96px 0 64px; }
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; color:var(--slate);
+    text-transform:uppercase; letter-spacing:1.5px; margin-bottom:20px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .dot{
+    width:8px; height:8px; border-radius:50%; background:var(--oxide);
+    transition:background 0.6s ease;
+  }
+  body.metallic .eyebrow .dot{ background:var(--slate); }
+
+  h1.name{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(40px, 6vw, 64px);
+    line-height:1.05; letter-spacing:-0.5px;
+    margin-bottom:18px;
+  }
+  .role{
+    font-size:19px; color:var(--slate); max-width:560px; margin-bottom:36px;
+  }
+  .role strong{ color:var(--ink); font-weight:600; }
+
+  /* Phase toggle — signature element */
+  .phase-panel{
+    border:1px solid var(--line); border-radius:2px;
+    padding:24px 28px; background:rgba(255,255,255,0.4);
+    margin-bottom:8px;
+  }
+  .phase-row{
+    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .phase-label{ font-family:var(--mono); font-size:13px; color:var(--slate); min-width:150px; }
+  .phase-track{
+    position:relative; flex:1; min-width:220px; height:8px;
+    background:linear-gradient(90deg, var(--oxide) 0%, var(--oxide) 45%, var(--slate) 55%, var(--slate) 100%);
+    border-radius:4px; cursor:pointer;
+  }
+  .phase-thumb{
+    position:absolute; top:50%; left:20%;
+    width:20px; height:20px; border-radius:50%;
+    background:var(--paper); border:3px solid var(--oxide);
+    transform:translate(-50%,-50%);
+    transition:left 0.6s cubic-bezier(.4,0,.2,1), border-color 0.6s ease;
+  }
+  body.metallic .phase-thumb{ left:80%; border-color:var(--slate); }
+  .phase-readout{
+    font-family:var(--mono); font-size:13px; text-align:right; min-width:150px;
+    color:var(--oxide); transition:color 0.6s ease;
+  }
+  body.metallic .phase-readout{ color:var(--slate); }
+  .phase-caption{
+    font-size:13px; color:#7a7568; margin-top:14px; font-style:italic;
+  }
+
+  section{ padding:56px 0; border-top:1px solid var(--line); }
+  h2.section-title{
+    font-family:var(--serif); font-weight:600; font-size:28px;
+    margin-bottom:28px; display:flex; align-items:baseline; gap:12px;
+  }
+  h2.section-title .idx{ font-family:var(--mono); font-size:14px; color:var(--oxide); font-weight:400; }
+
+  .prose p{ margin-bottom:16px; max-width:680px; color:#2a2925; }
+  .prose p:last-child{ margin-bottom:0; }
+  .prose a{
+    color:var(--oxide); text-decoration:none;
+    border-bottom:1px solid var(--oxide); padding-bottom:1px;
+  }
+  .prose a:hover{ color:var(--oxide-dim); }
+
+  .research-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:8px; }
+  @media (max-width:680px){ .research-grid{ grid-template-columns:1fr; } }
+  .research-card{
+    border:1px solid var(--line); padding:22px; border-radius:2px;
+    background:rgba(255,255,255,0.35);
+  }
+  .research-card h3{
+    font-family:var(--serif); font-size:18px; margin-bottom:10px; color:var(--oxide);
+  }
+  .research-card p{ font-size:14.5px; color:#443f38; }
+
+  .pub-list{ list-style:none; margin-bottom:8px; }
+  .subhead{
+    font-family:var(--mono); font-size:13px; text-transform:uppercase; letter-spacing:1px;
+    color:var(--slate); margin:32px 0 4px;
+  }
+  .subhead:first-of-type{ margin-top:8px; }
+  .pub-item{
+    padding:16px 0; border-bottom:1px solid var(--line);
+    display:grid; grid-template-columns:64px 1fr; gap:18px;
+  }
+  .pub-item:last-child{ border-bottom:none; }
+  .pub-year{ font-family:var(--mono); font-size:13px; color:var(--slate); padding-top:2px; }
+  .pub-title{ font-size:15.5px; margin-bottom:4px; }
+  .pub-venue{ font-size:13.5px; color:#7a7568; font-style:italic; }
+  .pub-venue a{
+    color:var(--oxide); font-style:normal; text-decoration:none;
+    border-bottom:1px solid var(--oxide); padding-bottom:1px;
+  }
+  .pub-venue a:hover{ color:var(--oxide-dim); }
+
+  .skills-wrap{ display:flex; flex-wrap:wrap; gap:10px; }
+
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:8px;
+  }
+  @media (max-width:680px){ .gallery-grid{ grid-template-columns:repeat(2, 1fr); } }
+  .gallery-slot{
+    aspect-ratio:4/3; border:1px dashed var(--line); border-radius:2px;
+    background:rgba(255,255,255,0.35);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .gallery-slot span{
+    font-family:var(--mono); font-size:12.5px; color:#a89f8f;
+    text-transform:uppercase; letter-spacing:0.5px;
+  }
+  .gallery-slot img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+
+  /* Graphical abstracts carousel */
+  .abstract-carousel{ position:relative; }
+  .abstract-track{
+    display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory;
+    scroll-behavior:smooth; padding-bottom:4px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .abstract-track::-webkit-scrollbar{ display:none; }
+  .abstract-track{ scrollbar-width:none; }
+  .abstract-slide{
+    flex:0 0 100%; scroll-snap-align:start;
+  }
+  @media (min-width:720px){
+    .abstract-slide{ flex:0 0 calc(60% - 10px); }
+  }
+  .abstract-img{
+    aspect-ratio:16/10; border:1px dashed var(--line); border-radius:2px;
+    background:rgba(255,255,255,0.35);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden; margin-bottom:12px;
+  }
+  .abstract-img span{
+    font-family:var(--mono); font-size:12.5px; color:#a89f8f;
+    text-transform:uppercase; letter-spacing:0.5px;
+  }
+  .abstract-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .abstract-caption{ font-size:14px; color:var(--slate); max-width:520px; }
+  .abstract-nav{
+    position:absolute; top:38%; transform:translateY(-50%);
+    width:38px; height:38px; border-radius:50%;
+    background:var(--paper); border:1px solid var(--line);
+    font-size:16px; color:var(--oxide); cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .abstract-nav:hover{ border-color:var(--oxide); }
+  .abstract-nav.prev{ left:-14px; }
+  .abstract-nav.next{ right:-14px; }
+  @media (max-width:600px){ .abstract-nav{ display:none; } }
+  .abstract-dots{
+    display:flex; gap:8px; margin-top:16px;
+  }
+  .abstract-dot{
+    width:7px; height:7px; border-radius:50%; background:var(--line);
+    border:none; cursor:pointer; padding:0;
+  }
+  .abstract-dot.active{ background:var(--oxide); }
+  .skill-tag{
+    font-family:var(--mono); font-size:13px; padding:6px 12px;
+    border:1px solid var(--line); border-radius:20px; color:var(--slate);
+  }
+
+  footer{ padding:48px 0 72px; }
+  .contact-row{ display:flex; gap:28px; flex-wrap:wrap; margin-top:18px; }
+  .contact-row a{
+    font-size:14.5px; text-decoration:none; border-bottom:1px solid var(--oxide);
+    padding-bottom:1px;
+  }
+  .fine{ margin-top:40px; font-family:var(--mono); font-size:12px; color:#9a9488; }
+
+  .editnote{
+    font-family:var(--mono); font-size:11.5px; color:#9a9488; background:var(--paper-dim);
+    border:1px dashed var(--line); padding:3px 8px; border-radius:3px; margin-left:8px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="brand">VO₂ / DOTIYAL</a>
+    <ul class="navlinks">
+      <li><a href="#education">Education</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#abstracts">Abstracts</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#skills">Techniques</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot" id="heroDot"></span> Materials Engineering &middot; RIES, Hokkaido University</div>
+    <h1 class="name">Mayank Dotiyal, Ph.D.</h1>
+    <p class="role">Postdoctoral Researcher at the <strong>Research Institute for Electronic Science (RIES), Hokkaido University</strong>, working on <strong>vanadium dioxide (VO&#8322;) thin films</strong> — engineering chemical strain and dopant chemistry to tune the semiconductor&ndash;to&ndash;metal transition for energy-efficient smart windows.</p>
+
+    <div class="phase-panel">
+      <div class="phase-row">
+        <span class="phase-label">Metal&ndash;Insulator Transition</span>
+        <div class="phase-track" id="phaseTrack" role="slider" tabindex="0" aria-label="Toggle VO2 phase state" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+          <div class="phase-thumb" id="phaseThumb"></div>
+        </div>
+        <span class="phase-readout" id="phaseReadout">T &lt; 68&deg;C &middot; Insulating</span>
+      </div>
+      <p class="phase-caption" id="phaseCaption">Below T꜀, VO&#8322; is IR-transparent and monoclinic. Click the track to cross T꜀ and watch it flip metallic.</p>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <h2 class="section-title"><span class="idx">§</span> About</h2>
+    <div class="prose">
+      <p>I am a Postdoctoral Researcher at the Research Institute for Electronic Science (RIES), Hokkaido University, working with <a href="https://functfilm.es.hokudai.ac.jp/english/member/%E5%A4%AA%E7%94%B0-%E8%A3%95%E9%81%93/" target="_blank" rel="noopener">Prof. Hiromichi Ohta</a>. I completed my Ph.D. in Materials Engineering at IIT Gandhinagar under <a href="https://sites.google.com/iitgn.ac.in/otfl/team?authuser=0" target="_blank" rel="noopener">Prof. Emila Panda</a>, focused on chemical strain-induced structural and semiconductor-to-metal transitions in VO&#8322; thin films, combining RF magnetron sputtering with first-principles DFT (VASP) to understand and engineer dopant-driven phase transitions.</p>
+      <p>Before this, my M.Tech work at NIT Hamirpur examined how surfactant chemistry controls nanoparticle size, strain, and optical defect states in Cr&#8322;O&#8323;. Across both, the throughline is correlating synthesis conditions with structure, defects, and functional properties in inorganic oxide systems.</p>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2 class="section-title"><span class="idx">§</span> Education</h2>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-year">2020&ndash;25</span>
+        <div>
+          <div class="pub-title">Ph.D., Materials Engineering — IIT Gandhinagar, Gujarat</div>
+          <div class="pub-venue">CPI 9.55/10</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2018&ndash;20</span>
+        <div>
+          <div class="pub-title">M.Tech, Materials Science and Engineering — NIT Hamirpur, Himachal Pradesh</div>
+          <div class="pub-venue">CPI 8.68/10</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2013&ndash;17</span>
+        <div>
+          <div class="pub-title">B.Tech, Mechanical Engineering — Lovely Professional University, Punjab</div>
+          <div class="pub-venue">CPI 9.21/10</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <h2 class="section-title"><span class="idx">01</span> Research Focus</h2>
+    <div class="research-grid">
+      <div class="research-card">
+        <h3>Doctoral Thesis</h3>
+        <p><em>Chemical strain-induced structural and semiconductor-to-metal transition in VO&#8322; thin film.</em> Substituted V&#8308;&#8314; lattice sites with larger-radius, higher-valency cationic dopants to lower the transition temperature toward near-room-temperature levels, fabricated via RF magnetron sputtering, and explained with DFT on unstrained and strained M&#8321;/R phases. Outcome: 2 Indian patents and 3 journal publications.</p>
+      </div>
+      <div class="research-card">
+        <h3>Master's Thesis</h3>
+        <p><em>Effect of surfactants on the structural and optical properties of Cr&#8322;O&#8323; nanoparticles.</em> Modulated anionic (SDS) and cationic (CTAB) surfactant concentration during wet-chemical co-precipitation to study lattice strain, defect states, and the inverse relationship between Urbach energy and bandgap.</p>
+      </div>
+      <div class="research-card">
+        <h3>Thermochromic Smart Windows</h3>
+        <p>Translating strain- and dopant-tuned VO&#8322; films into visibly transparent, highly stable heat-insulation coatings for energy-efficient buildings — supported by a Tata Steel MaterialNEXT4.0 student project grant.</p>
+      </div>
+      <div class="research-card">
+        <h3>Computational Modelling</h3>
+        <p>First-principles DFT calculations (VASP, Quantum ESPRESSO) on thermodynamic stability and formation energies to elucidate substitution-induced phase transitions in VO&#8322;.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+  GALLERY — how to add your own photos:
+  1. Upload your image files (e.g. lab.jpg, sputtering-chamber.jpg) into the same folder as this index.html,
+     or a subfolder like /images/.
+  2. For each .gallery-slot below, replace the placeholder <div class="gallery-slot">...</div>
+     with: <div class="gallery-slot"><img src="images/your-photo.jpg" alt="Describe the photo"></div>
+  3. Add or remove <div class="gallery-slot">...</div> blocks freely — the grid adjusts automatically.
+
+<section id="gallery">
+  <div class="wrap">
+    <h2 class="section-title"><span class="idx">02</span> Gallery</h2>
+    <div class="gallery-grid">
+      <div class="gallery-slot"><span>Add photo</span></div>
+      <div class="gallery-slot"><span>Add photo</span></div>
+      <div class="gallery-slot"><span>Add photo</span></div>
+      <div class="gallery-slot"><span>Add photo</span></div>
+      <div class="gallery-slot"><span>Add photo</span></div>
+      <div class="gallery-slot"><span>Add photo</span></div>
+    </div>
+  </div>
+</section>
+-->
+<!--
+  GRAPHICAL ABSTRACTS — how to add your own:
+  1. Upload image files (e.g. jallcom2026.jpg) into the same folder as this index.html, or an /images/ subfolder.
+  2. For each .abstract-slide below, replace the placeholder content inside <div class="abstract-img">
+     with: <img src="images/jallcom2026.jpg" alt="Graphical abstract for [paper title]">
+  3. Copy/paste a whole <div class="abstract-slide">...</div> block to add more slides.
+-->
+<section id="abstracts">
+  <div class="wrap">
+    <h2 class="section-title"><span class="idx">02</span> Graphical Abstracts</h2>
+    <div class="abstract-carousel">
+      <div class="abstract-track" id="abstractTrack">
+        <div class="abstract-slide">
+          <div class="abstract-img"><img src="images/jalcom-26.png"></div>
+          <div class="abstract-caption">Dopant induced variation in electronic structure, crystal structure, and electrical properties in VO&#8322;</div>
+        </div>
+        <div class="abstract-slide">
+          <div class="abstract-img"><img src="images/apsus-25.png"></div>
+          <div class="abstract-caption">Designing optically transparent heat insulation coating through chemical strain modulation</div>
+        </div>
+        <div class="abstract-slide">
+          <div class="abstract-img"><img src="images/ceri-24.png"></div>
+          <div class="abstract-caption">Fabricating highly stable and reliable vanadium dioxide thin films via RF magnetron sputtering</div>
+        </div>
+       </div>
+      <button class="abstract-nav prev" id="abstractPrev" aria-label="Previous abstract">&#8592;</button>
+      <button class="abstract-nav next" id="abstractNext" aria-label="Next abstract">&#8594;</button>
+    </div>
+    <div class="abstract-dots" id="abstractDots"></div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <h2 class="section-title"><span class="idx">03</span> Publications &amp; Patents</h2>
+
+    <h3 class="subhead">Peer-Reviewed Journal Articles</h3>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-year">2026</span>
+        <div>
+          <div class="pub-title">Dopant induced variation in electronic structure, crystal structure, and electrical properties in VO&#8322;: Correlation between theory and experiment</div>
+          <div class="pub-venue">Journal of Alloys and Compounds, 1074, 189095 &middot; <a href="https://doi.org/10.1016/j.jallcom.2026.189095" target="_blank" rel="noopener">DOI</a></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2026</span>
+        <div>
+          <div class="pub-title">Designing optically transparent heat insulation coating through chemical strain modulation</div>
+          <div class="pub-venue">Applied Surface Science, 716, 164660 &middot; <a href="https://doi.org/10.1016/j.apsusc.2025.164660" target="_blank" rel="noopener">DOI</a></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2024</span>
+        <div>
+          <div class="pub-title">Fabricating highly stable and reliable vanadium dioxide thin films: Insights from radio frequency magnetron sputtering</div>
+          <div class="pub-venue">Ceramics International, 50 (22), part C, 48234&ndash;48245 &middot; <a href="https://doi.org/10.1016/j.ceramint.2024.09.173" target="_blank" rel="noopener">DOI</a></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">Microchemical induced magnetic changes in thermally oxidized Sm&#8322;(Co, Fe, Cu, Zr)&#8321;&#8324; alloys</div>
+          <div class="pub-venue">Journal of Alloys and Compounds, 1027, 180608 &middot; <a href="https://doi.org/10.1016/j.jallcom.2025.180608" target="_blank" rel="noopener">DOI</a></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">Highly active brookite titania nanoparticles for degradation of toxic organic pollutants</div>
+          <div class="pub-venue">Powder Technology, 466, 121373 &middot; <a href="https://doi.org/10.1016/j.powtec.2025.121373" target="_blank" rel="noopener">DOI</a></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">Antibacterial activity of cellulose acetate&ndash;graphene oxide composites: a comprehensive multimethod assessment</div>
+          <div class="pub-venue">ACS Omega &middot; <a href="https://pubs.acs.org/doi/10.1021/acsomega.5c04982" target="_blank" rel="noopener">DOI</a></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">Tunable titanium and tantalum oxide coatings as highly efficient antibacterial agents</div>
+          <div class="pub-venue">Ceramics International &middot; <a href="https://doi.org/10.1016/j.ceramint.2025.08.432" target="_blank" rel="noopener">DOI</a></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">Under review</span>
+        <div>
+          <div class="pub-title">Adsorption-Induced Transformation of a 2D Cu-MOF into a Mn-Integrated Catalytic Nanonetwork for Circular Pollutant Valorisation</div>
+          <div class="pub-venue">Under review</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">Under review</span>
+        <div>
+          <div class="pub-title">Sustainable substrate-fed regenerative growth of metal-organic framework thin film</div>
+          <div class="pub-venue">Under review</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">In prep</span>
+        <div>
+          <div class="pub-title">Thermodynamics of strain-engineered VO&#8322; overgrowth</div>
+          <div class="pub-venue">Under review</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">In prep</span>
+        <div>
+          <div class="pub-title">Adverse thermal oxidation behavior in Pr-alloyed SmCo&#8325; powder: Microstructure and kinetic characteristics</div>
+          <div class="pub-venue">In preparation</div>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="subhead">Conference Proceedings &amp; Book Chapters</h3>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-year">2022</span>
+        <div>
+          <div class="pub-title">Influence of anionic surfactant (SDS) on the structural properties of chromium oxide (Cr&#8322;O&#8323;) nanoparticles</div>
+          <div class="pub-venue">Materials Today: Proceedings, 69 (2), 193&ndash;198 &middot; <a href="https://doi.org/10.1016/j.matpr.2022.08.340" target="_blank" rel="noopener">DOI</a></div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2021</span>
+        <div>
+          <div class="pub-title">A detailed investigation of structural and optical properties of CTAB assisted Cr&#8322;O&#8323; nanoparticles</div>
+          <div class="pub-venue">Advances in Functional and Smart Materials, Lecture Notes in Mechanical Engineering, Springer &middot; <a href="https://doi.org/10.1007/978-981-19-4147-4_30" target="_blank" rel="noopener">DOI</a></div>
+        </div>
+      </li>
+    </ul>
+
+    <h3 class="subhead">Patents</h3>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-year">2023</span>
+        <div>
+          <div class="pub-title">A process for thermochromic coating</div>
+          <div class="pub-venue">Indian Patent Office &middot; Application No. 202321024764 &middot; filed 31.03.2023</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">Method of visibly-transparent heat-insulation coating and coated substrate obtained therefrom</div>
+          <div class="pub-venue">Indian Patent Office &middot; Application No. 202521063654 &middot; filed 03.07.2025</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">A method of fabricating metal-organic framework (MOF) membranes on substrates</div>
+          <div class="pub-venue">Indian Patent Office &middot; Application No. 202521067473 &middot; filed 15.07.2025</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2 class="section-title"><span class="idx">04</span> Techniques</h2>
+    <div class="skills-wrap">
+      <span class="skill-tag">RF Magnetron Sputtering</span>
+      <span class="skill-tag">Spin Coating</span>
+      <span class="skill-tag">XRD (XRPD, GI-XRD, in situ T-dependent)</span>
+      <span class="skill-tag">XRR</span>
+      <span class="skill-tag">TEM / STEM</span>
+      <span class="skill-tag">XPS</span>
+      <span class="skill-tag">Hall Effect / 4-Probe</span>
+      <span class="skill-tag">UV-Vis-NIR &amp; FTIR</span>
+      <span class="skill-tag">SEM / EDS</span>
+      <span class="skill-tag">AFM</span>
+      <span class="skill-tag">Surface Profilometry</span>
+      <span class="skill-tag">PPMS</span>
+      <span class="skill-tag">DFT (VASP, Quantum ESPRESSO)</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 class="section-title"><span class="idx">§</span> Contact</h2>
+    <p class="prose">Open to collaboration on oxide thin-film synthesis, doping strategies, and device integration. Research Institute for Electronic Science (RIES), Hokkaido University, Sapporo, Japan.</p>
+    <div class="contact-row">
+      <a href="mailto:mayankd@iitgn.ac.in">mayankd@iitgn.ac.in</a>
+      <a href="tel:+918196035988">+91 8196035988</a>
+      <a href="#" class="editnote">LinkedIn — add link</a>
+      <a href="#" class="editnote">ORCID — add link</a>
+      <a href="#" class="editnote">Google Scholar — add link</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const track = document.getElementById('phaseTrack');
+  const readout = document.getElementById('phaseReadout');
+  const caption = document.getElementById('phaseCaption');
+  let metallic = false;
+
+  function setPhase(isMetallic){
+    metallic = isMetallic;
+    document.body.classList.toggle('metallic', metallic);
+    track.setAttribute('aria-valuenow', metallic ? '1' : '0');
+    if(metallic){
+      readout.textContent = 'T > 68°C · Metallic';
+      caption.textContent = 'Above T꜀, VO₂ flips to rutile and reflects IR — the switch that makes it useful for smart windows.';
+    } else {
+      readout.textContent = 'T < 68°C · Insulating';
+      caption.textContent = 'Below T꜀, VO₂ is IR-transparent and monoclinic. Click the track to cross T꜀ and watch it flip metallic.';
+    }
+  }
+
+  track.addEventListener('click', () => setPhase(!metallic));
+  track.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setPhase(!metallic); }
+  });
+
+  // Graphical abstracts carousel
+  const abstractTrack = document.getElementById('abstractTrack');
+  const abstractSlides = Array.from(abstractTrack.children);
+  const prevBtn = document.getElementById('abstractPrev');
+  const nextBtn = document.getElementById('abstractNext');
+  const dotsWrap = document.getElementById('abstractDots');
+
+  abstractSlides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'abstract-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to abstract ' + (i + 1));
+    dot.addEventListener('click', () => scrollToSlide(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function scrollToSlide(i){
+    abstractSlides[i].scrollIntoView({ behavior:'smooth', inline:'start', block:'nearest' });
+  }
+
+  function currentIndex(){
+    const trackLeft = abstractTrack.scrollLeft;
+    let closest = 0, minDist = Infinity;
+    abstractSlides.forEach((slide, i) => {
+      const dist = Math.abs(slide.offsetLeft - trackLeft);
+      if(dist < minDist){ minDist = dist; closest = i; }
+    });
+    return closest;
+  }
+
+  function updateDots(){
+    const idx = currentIndex();
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  prevBtn.addEventListener('click', () => scrollToSlide(Math.max(0, currentIndex() - 1)));
+  nextBtn.addEventListener('click', () => scrollToSlide(Math.min(abstractSlides.length - 1, currentIndex() + 1)));
+  abstractTrack.addEventListener('scroll', () => {
+    window.clearTimeout(abstractTrack._t);
+    abstractTrack._t = window.setTimeout(updateDots, 80);
+  });
+</script>
+
+</body>
+</html>
